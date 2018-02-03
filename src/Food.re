@@ -1,5 +1,8 @@
 let component = ReasonReact.statelessComponent("Food");
 
+/*
+   Food takes a position (x, y) and then renders on that coordinates
+ */
 let make = (~position, _children) => {
   ...component,
   render: (_self) => {

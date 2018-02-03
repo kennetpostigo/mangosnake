@@ -1,8 +1,14 @@
+/*
+   Snake Condition
+ */
 type condition =
   | Alive
   | Paused
   | Dead;
 
+/*
+   Input keys to register
+ */
 type key =
   | Space
   | Left
@@ -11,8 +17,12 @@ type key =
   | Down
   | Noop;
 
+/*
+ Food point (x, y)
+ */
 type foodPoint = (int, int);
 
+/* (x, y, Key, [(x, y, Key)])<TurnPoints> */
 type point = (int, int, key, array((int, int, key)));
 
 type state = {
@@ -20,12 +30,18 @@ type state = {
   condition
 };
 
+/*
+   Type of Game Actions
+ */
 type action =
   | Move
   | KeyPress(key)
   | Eat
   | Kill;
 
+/*
+   Turn int representation of key into Tag
+ */
 let codeToKey = (event) => {
   let code = ReactEventRe.Keyboard.which(event);
   switch code {
@@ -38,6 +54,10 @@ let codeToKey = (event) => {
   }
 };
 
+/*
+   - Grab last Item in List
+   - use it's x and y and turnpoints in order to determine where to place it
+ */
 let grow = (points: array(point)) => {
   let (x, y, direction, turnPoints) = points[Array.length(points) - 1];
   switch direction {
@@ -50,6 +70,9 @@ let grow = (points: array(point)) => {
   }
 };
 
+/*
+   If the character is dead don't turn anything other wise turn
+ */
 let turn = (state, next: key) =>
   switch state.condition {
   | Dead => state

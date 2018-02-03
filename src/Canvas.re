@@ -1,9 +1,15 @@
+/*
+   Playing states
+ */
 type playing =
   | NewGame
   | Playing
   | Paused
   | GameOver;
 
+/*
+   Food Point (x, y)
+ */
 type foodPoint = (int, int);
 
 type state = {
@@ -51,6 +57,7 @@ let gameTextCss =
     ()
   );
 
+/* Creates a random number within the games boundaries */
 let placeFood = () => Js.Math.floor_int(Js.Math.random() *. (580. -. 0. +. 1.)) + 0;
 
 let component = ReasonReact.reducerComponent("Canvas");
