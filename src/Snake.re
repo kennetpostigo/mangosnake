@@ -56,7 +56,6 @@ let turn = (state, next: key) =>
   | Paused
   | Alive =>
     let (xh, yh, _, _) = state.points[0];
-    /* let (xt, yt, _, _) = state.points[Array.length(state.points) - 1]; */
     let nextPoints =
       Array.map(
         ((x, y, direction, turnPoints)) =>
@@ -275,7 +274,7 @@ let make = (~gameOver, ~pause, ~eat, ~food: foodPoint, _children) => {
       ReasonReact.UpdateWithSideEffects({...state, condition: Dead}, ((_state) => gameOver()))
     },
   subscriptions: (self) => [
-    Sub(() => Js.Global.setInterval(() => self.send(Move), 6), Js.Global.clearInterval)
+    Sub(() => Js.Global.setInterval(() => self.send(Move), 5), Js.Global.clearInterval)
   ],
   render: ({send, state}) => {
     let count = ref((-1));
